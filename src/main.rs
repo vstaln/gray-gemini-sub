@@ -52,10 +52,18 @@ fn manifest() -> Value {
 
 // ---------- config ----------
 
+/// The user's home dir: `$HOME`, or `%USERPROFILE%` on Windows where
+/// HOME is typically unset for a natively-spawned process.
+fn home_dir() -> Option<std::path::PathBuf> {
+    std::env::var_os("HOME")
+        .or_else(|| std::env::var_os("USERPROFILE"))
+        .map(std::path::PathBuf::from)
+}
+
 fn state_dir() -> std::path::PathBuf {
     let home = std::env::var_os("GRAY_HOME")
         .map(std::path::PathBuf::from)
-        .or_else(|| std::env::var_os("HOME").map(|h| std::path::PathBuf::from(h).join(".gray")))
+        .or_else(|| home_dir().map(|h| h.join(".gray")))
         .unwrap_or_else(|| std::path::PathBuf::from("."));
     home.join(NAME)
 }
