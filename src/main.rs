@@ -46,6 +46,7 @@ fn manifest() -> Value {
             &["models", "chat"], CACHE_TTL_SECS,
         )],
         "commands": ["/gemini"],
+        "command_descriptions": {"/gemini": "switch to Gemini models"},
         "subcommands": ["gemini"],
     })
 }
