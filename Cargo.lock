@@ -176,7 +176,7 @@ dependencies = [
 
 [[package]]
 name = "gray-gemini-sub"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "gray-acp",
  "gray-openai-compat",
